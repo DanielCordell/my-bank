@@ -5,14 +5,21 @@ import java.util.List;
 
 public class Account {
 
-    public static final int CHECKING = 0;
-    public static final int SAVINGS = 1;
-    public static final int MAXI_SAVINGS = 2;
+    public enum ACCOUNT_TYPE {
+        CHECKING("Checking Account"),
+        SAVINGS("Savings Account"),
+        SUPER_SAVINGS("Super Savings Account"),
+        MAXI_SAVINGS("Maxi Savings Account");
 
-    private final int accountType;
+        private final String enumName;
+        ACCOUNT_TYPE(String enumName) { this.enumName = enumName; }
+        String getPrettyName() { return enumName; }
+    }
+
+    private final ACCOUNT_TYPE accountType;
     public List<Transaction> transactions;
 
-    public Account(int accountType) {
+    public Account(ACCOUNT_TYPE accountType) {
         this.accountType = accountType;
         this.transactions = new ArrayList<Transaction>();
     }
@@ -41,9 +48,9 @@ public void withdraw(double amount) {
                     return amount * 0.001;
                 else
                     return 1 + (amount-1000) * 0.002;
-//            case SUPER_SAVINGS:
-//                if (amount <= 4000)
-//                    return 20;
+           case SUPER_SAVINGS:
+                if (amount <= 4000)
+                    return 20;
             case MAXI_SAVINGS:
                 if (amount <= 1000)
                     return amount * 0.02;

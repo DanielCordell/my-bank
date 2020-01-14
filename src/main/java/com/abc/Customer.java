@@ -48,18 +48,8 @@ public class Customer {
     private String statementForAccount(Account a) {
         StringBuilder s = new StringBuilder();
 
-       //Translate to pretty account type
-        switch(a.getAccountType()){
-            case Account.CHECKING:
-                s.append("Checking Account\n");
-                break;
-            case Account.SAVINGS:
-                s.append("Savings Account\n");
-                break;
-            case Account.MAXI_SAVINGS:
-                s.append("Maxi Savings Account\n");
-                break;
-        }
+        s.append(a.getAccountType().getPrettyName());
+        s.append("\n");
 
         //Now total up all the transactions
         double total = 0.0;
