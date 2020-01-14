@@ -63,17 +63,10 @@ public void withdraw(double amount) {
     }
 
     public double sumTransactions() {
-       return checkIfTransactionsExist(true);
+        return transactions.stream().mapToDouble(it-> it.amount).sum();
     }
 
-    private double checkIfTransactionsExist(boolean checkAll) {
-        double amount = 0.0;
-        for (Transaction t: transactions)
-            amount += t.amount;
-        return amount;
-    }
-
-    public int getAccountType() {
+    public ACCOUNT_TYPE getAccountType() {
         return accountType;
     }
 
