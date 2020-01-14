@@ -11,7 +11,7 @@ public class Customer {
 
     public Customer(String name) {
         this.name = name;
-        this.accounts = new ArrayList<Account>();
+        this.accounts = new ArrayList<>();
     }
 
     public String getName() {

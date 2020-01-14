@@ -21,7 +21,7 @@ public class Account {
 
     public Account(ACCOUNT_TYPE accountType) {
         this.accountType = accountType;
-        this.transactions = new ArrayList<Transaction>();
+        this.transactions = new ArrayList<>();
     }
 
     public void deposit(double amount) {
