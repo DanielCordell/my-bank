@@ -8,7 +8,6 @@ public class Account {
     public enum ACCOUNT_TYPE {
         CHECKING("Checking Account"),
         SAVINGS("Savings Account"),
-        SUPER_SAVINGS("Super Savings Account"),
         MAXI_SAVINGS("Maxi Savings Account");
 
         private final String enumName;
@@ -48,9 +47,6 @@ public void withdraw(double amount) {
                     return amount * 0.001;
                 else
                     return 1 + (amount-1000) * 0.002;
-           case SUPER_SAVINGS:
-                if (amount <= 4000)
-                    return 20;
             case MAXI_SAVINGS:
                 if (amount <= 1000)
                     return amount * 0.02;
