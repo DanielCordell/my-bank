@@ -48,7 +48,7 @@ public class Account {
     }
 
     public double interestEarned() {
-        double amount = sumTransactions();
+        double amount = currentBalance();
         switch(accountType){
             case SAVINGS:
                 if (amount <= 1000)
@@ -66,6 +66,7 @@ public class Account {
     }
 
     public double sumTransactions() {
+    public double currentBalance() {
         return transactions.stream().mapToDouble(Transaction::getAmount).sum();
     }
 
