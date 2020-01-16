@@ -17,7 +17,11 @@ public class Bank {
     public String customerSummary() {
         StringBuilder summary = new StringBuilder("Customer Summary");
         for (Customer c : customers)
-            summary.append("\n - ").append(c.getName()).append(" (").append(format(c.getNumberOfAccounts(), "account")).append(")");
+            summary.append("\n - ")
+                    .append(c.getName())
+                    .append(" (")
+                    .append(c.getNumberOfAccounts() == 1 ? "account" : "accounts")
+                    .append(")");
         return summary.toString();
     }
 
@@ -28,10 +32,7 @@ public class Bank {
     }
 
     public double totalInterestPaid() {
-        double total = 0;
-        for(Customer c: customers)
-            total += c.totalInterestEarned();
-        return total;
+        return customers.stream().mapToDouble(Customer::totalInterestEarned).sum();
     }
 
     public String getFirstCustomer() {
