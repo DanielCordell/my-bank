@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.abs;
+import static com.abc.util.Math.toDollars;
 
 public class Customer {
     private String name;
@@ -62,7 +63,4 @@ public class Customer {
         return s.toString();
     }
 
-    private String toDollars(double d){
-        return String.format("$%,.2f", abs(d));
-    }
 }
