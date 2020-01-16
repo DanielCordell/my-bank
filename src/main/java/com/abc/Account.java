@@ -1,5 +1,6 @@
 package com.abc;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,13 @@ public class Account {
         }
     }
 
+    public boolean anyWithdrawlsInPastDays(int numberOfDays) {
+        Instant daysAgo = InstantProvider.getInstance().daysAgo(numberOfDays);
+        return transactions
+                .stream()
+                .anyMatch(it -> it.getTransactionInstant().isAfter(daysAgo));
+    }
+
     public double interestEarned() {
         double amount = sumTransactions();
         switch(accountType){
@@ -47,18 +55,18 @@ public class Account {
                     return amount * 0.001;
                 return 1 + (amount-1000) * 0.002;
             case MAXI_SAVINGS:
-                if (amount <= 1000)
-                    return amount * 0.02;
-                if (amount <= 2000)
-                    return 20 + (amount-1000) * 0.05;
-                return 70 + (amount-2000) * 0.1;
-            default: // Checking Account
+                if (anyWithdrawlsInPastDays(10))
+                    return amount * 0.001;
+                return 0.05;
+            case CHECKING:
                 return amount * 0.001;
+            default:
+                throw new IllegalArgumentException("Either a bad enum value, or savings account has not been given an interest calculation!");
         }
     }
 
     public double sumTransactions() {
-        return transactions.stream().mapToDouble(it-> it.amount).sum();
+        return transactions.stream().mapToDouble(Transaction::getAmount).sum();
     }
 
     public ACCOUNT_TYPE getAccountType() {
