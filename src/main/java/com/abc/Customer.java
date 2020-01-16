@@ -54,8 +54,9 @@ public class Customer {
         //Now total up all the transactions
         double total = 0.0;
         for (Transaction t : a.transactions) {
-            s.append("  ").append(t.amount < 0 ? "withdrawal" : "deposit").append(" ").append(toDollars(t.amount)).append("\n");
-            total += t.amount;
+            double amount = t.getAmount();
+            s.append("  ").append(amount < 0 ? "withdrawal" : "deposit").append(" ").append(toDollars(amount)).append("\n");
+            total += amount;
         }
         s.append("Total ").append(toDollars(total));
         return s.toString();
