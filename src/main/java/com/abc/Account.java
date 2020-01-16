@@ -65,7 +65,18 @@ public class Account {
         }
     }
 
-    public double sumTransactions() {
+    public void transferTo(Account to, double amount) {
+        if (amount <= 0) throw new IllegalArgumentException("Amount to transfer must be greater than 0");
+        if (amount > currentBalance()) throw new IllegalArgumentException("Amount to transfer cannot be greater account balance");
+        withdraw(amount);
+        try {
+            to.deposit(amount);
+        } catch (IllegalArgumentException ex) {
+            deposit(amount);
+            throw ex;
+        }
+    }
+
     public double currentBalance() {
         return transactions.stream().mapToDouble(Transaction::getAmount).sum();
     }
