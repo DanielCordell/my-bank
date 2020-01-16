@@ -3,7 +3,7 @@ package com.abc;
 import java.time.Instant;
 
 public class Transaction {
-    public final double amount;
+    private final double amount;
 
     private Instant transactionInstant;
 
@@ -12,4 +12,12 @@ public class Transaction {
         this.transactionInstant = InstantProvider.getInstance().now();
     }
 
+
+    public Instant getTransactionInstant() {
+        return transactionInstant;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
 }
