@@ -12,7 +12,6 @@ public class Transaction {
         this.transactionInstant = InstantProvider.getInstance().now();
     }
 
-
     public Instant getTransactionInstant() {
         return transactionInstant;
     }
